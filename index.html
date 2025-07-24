@@ -6,21 +6,21 @@
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap');body {
   margin: 0;
   font-family: 'Cairo', sans-serif;
-  background: linear-gradient(to top left, #fdfdfd, #f4f4f8);
+  background: #fdfdfd url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: #222;
   position: relative;
   overflow-x: hidden;
 }
 
 body::before {
-  content: "أحمد الطيب أحمد";
+  content: "";
   position: absolute;
-  font-size: 10rem;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: rgba(0, 0, 0, 0.03);
-  white-space: nowrap;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.88);
   z-index: 0;
 }
 
@@ -36,6 +36,18 @@ header {
 header h1 {
   margin: 0;
   font-size: 1.8rem;
+}
+
+.bio {
+  background-color: #ffffffee;
+  margin: 0 auto;
+  padding: 1.5rem;
+  max-width: 900px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  z-index: 1;
+  position: relative;
 }
 
 .container {
@@ -77,11 +89,14 @@ header h1 {
 <body>
   <header>
     <h1>تعريف بالكاتب / أحمد الطيب أحمد</h1>
-  </header>  <div class="container">
+  </header>  <div class="bio">
+    وُلد بقرية الحصايا وهي من أعمال الدامر، عاصمة ولاية نهر النيل. درس المراحل التعليمية الأولى بالولاية، ثم التحق بجامعة الخرطوم وتخرج في كلية الاقتصاد والدراسات السياسية والاجتماعية. حاصل على ماجستير في علم الاجتماع من جامعة الجزيرة. عمل بمجال الصحافة والإعلام في كل من السودان ودولة الإمارات العربية المتحدة. عمل رئيساً لمجلس إدارة شركة الحصايا الزراعية. عمل عضواً بمجلس إدارة بنك الشمال الإسلامي الذي تغير اسمه لاحقاً إلى بنك البلد. عمل رئيس مجلس إدارة صحيفة "الحياة" السياسية اليومية التي كانت تصدر في الخرطوم. عمل مديراً للإدارة العامة لمعرض الخرطوم الدولي. عمل مديراً عاماً ورئيساً لمجلس إدارة شركة آكام الفنية الحديثة. 
+    <br>للإطلاع على مؤلفاته:
+  </div>  <div class="container">
     <div class="book">
       <div class="book-title">السنة النبوية: قضايا ومرافعات</div>
       <div class="actions">
-        <a href="#">📖 قراءة الكتاب</a>
+        <a href="#" target="_blank">📖 قراءة الكتاب</a>
         <a href="#">⬇️ تحميل الكتاب</a>
       </div>
     </div><div class="book">
@@ -95,7 +110,7 @@ header h1 {
 <div class="book">
   <div class="book-title">كتيب: إصلاح الصلاة وسجود السهو</div>
   <div class="actions">
-    <a href="#">📖 قراءة الكتاب</a>
+    <a href="#" target="_blank">📖 قراءة الكتاب</a>
     <a href="#">⬇️ تحميل الكتاب</a>
   </div>
 </div>
@@ -103,7 +118,7 @@ header h1 {
 <div class="book">
   <div class="book-title">كتيب: عمك الطيب ود أحمد</div>
   <div class="actions">
-    <a href="#">📖 قراءة الكتاب</a>
+    <a href="#" target="_blank">📖 قراءة الكتاب</a>
     <a href="#">⬇️ تحميل الكتاب</a>
   </div>
 </div>
@@ -111,7 +126,7 @@ header h1 {
 <div class="book">
   <div class="book-title">سرادب الأحلام – ديوان شعر</div>
   <div class="actions">
-    <a href="#">📖 قراءة الكتاب</a>
+    <a href="#" target="_blank">📖 قراءة الكتاب</a>
     <a href="#">⬇️ تحميل الكتاب</a>
   </div>
 </div>
@@ -119,7 +134,7 @@ header h1 {
 <div class="book">
   <div class="book-title">هامات عالية وذرا – ديوان شعر</div>
   <div class="actions">
-    <a href="#">📖 قراءة الكتاب</a>
+    <a href="#" target="_blank">📖 قراءة الكتاب</a>
     <a href="#">⬇️ تحميل الكتاب</a>
   </div>
 </div>
