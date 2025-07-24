@@ -1,109 +1,114 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <title>تعريف بالكاتب / أحمد الطيب أحمد</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap');body {
+  margin: 0;
+  font-family: 'Cairo', sans-serif;
+  background: #fdfdfd url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #222;
+  position: relative;
+  overflow-x: hidden;
+}
 
-    body {
-      margin: 0;
-      font-family: 'Cairo', sans-serif;
-      background: #fdfdfd url('background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: #222;
-      position: relative;
-      overflow-x: hidden;
-    }
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.88);
+  z-index: 0;
+}
 
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.88);
-      z-index: 0;
-    }
+header {
+  background-color: #004e7c;
+  color: white;
+  padding: 2rem;
+  text-align: right;
+  position: relative;
+  z-index: 1;
+}
 
-    header {
-      background-color: #004e7c;
-      color: white;
-      padding: 2rem;
-      text-align: right;
-      position: relative;
-      z-index: 1;
-    }
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
 
-    header h1 {
-      margin: 0;
-      font-size: 1.8rem;
-    }
+.bio {
+  background-color: #ffffffee;
+  margin: 0 auto;
+  padding: 1.5rem;
+  max-width: 900px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  z-index: 1;
+  position: relative;
+}
 
-    .bio {
-      background-color: #ffffffee;
-      margin: 0 auto;
-      padding: 1.5rem;
-      max-width: 900px;
-      border-radius: 8px;
-      font-size: 1.05rem;
-      line-height: 1.8;
-      z-index: 1;
-      position: relative;
-    }
+.bio p {
+  margin: 0.5rem 0;
+}
 
-    .bio p {
-      margin: 0.5rem 0;
-    }
+.highlight {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
 
-    .highlight {
-      font-weight: bold;
-      font-size: 1.1rem;
-      margin-top: 1rem;
-    }
+.bio-image {
+  float: left;
+  margin: 0 1.5rem 1rem 0;
+  width: 180px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-    .container {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 1rem;
-      position: relative;
-      z-index: 1;
-    }
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  position: relative;
+  z-index: 1;
+}
 
-    .book {
-      background-color: white;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
+.book {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
 
-    .book-title {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-    }
+.book-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
 
-    .actions a {
-      text-decoration: none;
-      color: #0077aa;
-      margin-left: 1rem;
-      font-weight: bold;
-    }
+.actions a {
+  text-decoration: none;
+  color: #0077aa;
+  margin-left: 1rem;
+  font-weight: bold;
+}
 
-    .actions a:hover {
-      text-decoration: underline;
-    }
+.actions a:hover {
+  text-decoration: underline;
+}
+
   </style>
 </head>
 <body>
   <header>
     <h1>تعريف بالكاتب / أحمد الطيب أحمد</h1>
-  </header>
-
-  <div class="bio">
+  </header>  <div class="bio">
+    <img src="original.jpg" alt="صورة الكاتب" class="bio-image">
     <p>ولد بقرية الحصايا وهي من اعمال الدامر، عاصمة ولاية نهر النيل.</p>
     <p>درس المراحل التعليمية الأولى بالولاية ، ثم التحق بجامعة الخرطوم وتخرج في كلية الاقتصاد والدراسات السياسية والاجتماعية.</p>
     <p>حاصل على ماجستير في علم الاجتماع جامعة الجزيرة.</p>
@@ -114,56 +119,53 @@
     <p>عمل مديراً للإدارة العامة لمعرض الخرطوم الدولي.</p>
     <p>عمل مديرا عاماً ورئيساً لمجلس إدارة شركة آكام الفنية الحديثة.</p>
     <p class="highlight">للإطلاع على مؤلفاته:</p>
-  </div>
-
-  <div class="container">
+  </div>  <div class="container">
     <div class="book">
       <div class="book-title">السنة النبوية: قضايا ومرافعات</div>
       <div class="actions">
         <a href="books/book1.pdf" target="_blank">📖 قراءة الكتاب</a>
         <a href="books/book1.pdf" download>⬇️ تحميل الكتاب</a>
       </div>
-    </div>
+    </div><div class="book">
+  <div class="book-title">الخلاف بين الصحابة، والتأسيس لنظام حكم إسلامي</div>
+  <div class="actions">
+    <a href="الخلاف_بين_الصحابة_أحمد_الطيب_أحمد.pdf" target="_blank">📖 قراءة الكتاب</a>
+    <a href="الخلاف_بين_الصحابة_أحمد_الطيب_أحمد.pdf" download>⬇️ تحميل الكتاب</a>
+  </div>
+</div>
 
-    <div class="book">
-      <div class="book-title">الخلاف بين الصحابة، والتأسيس لنظام حكم إسلامي</div>
-      <div class="actions">
-        <a href="الخلاف_بين_الصحابة_أحمد_الطيب_أحمد.pdf" target="_blank">📖 قراءة الكتاب</a>
-        <a href="الخلاف_بين_الصحابة_أحمد_الطيب_أحمد.pdf" download>⬇️ تحميل الكتاب</a>
-      </div>
-    </div>
+<div class="book">
+  <div class="book-title">كتيب: إصلاح الصلاة وسجود السهو</div>
+  <div class="actions">
+    <a href="books/book3.pdf" target="_blank">📖 قراءة الكتاب</a>
+    <a href="books/book3.pdf" download>⬇️ تحميل الكتاب</a>
+  </div>
+</div>
 
-    <div class="book">
-      <div class="book-title">كتيب: إصلاح الصلاة وسجود السهو</div>
-      <div class="actions">
-        <a href="books/book3.pdf" target="_blank">📖 قراءة الكتاب</a>
-        <a href="books/book3.pdf" download>⬇️ تحميل الكتاب</a>
-      </div>
-    </div>
+<div class="book">
+  <div class="book-title">كتيب: عمك الطيب ود أحمد</div>
+  <div class="actions">
+    <a href="books/book4.pdf" target="_blank">📖 قراءة الكتاب</a>
+    <a href="books/book4.pdf" download>⬇️ تحميل الكتاب</a>
+  </div>
+</div>
 
-    <div class="book">
-      <div class="book-title">كتيب: عمك الطيب ود أحمد</div>
-      <div class="actions">
-        <a href="books/book4.pdf" target="_blank">📖 قراءة الكتاب</a>
-        <a href="books/book4.pdf" download>⬇️ تحميل الكتاب</a>
-      </div>
-    </div>
+<div class="book">
+  <div class="book-title">سرادب الأحلام – ديوان شعر</div>
+  <div class="actions">
+    <a href="books/book5.pdf" target="_blank">📖 قراءة الكتاب</a>
+    <a href="books/book5.pdf" download>⬇️ تحميل الكتاب</a>
+  </div>
+</div>
 
-    <div class="book">
-      <div class="book-title">سرادب الأحلام – ديوان شعر</div>
-      <div class="actions">
-        <a href="books/book5.pdf" target="_blank">📖 قراءة الكتاب</a>
-        <a href="books/book5.pdf" download>⬇️ تحميل الكتاب</a>
-      </div>
-    </div>
+<div class="book">
+  <div class="book-title">هامات عالية وذرا – ديوان شعر</div>
+  <div class="actions">
+    <a href="books/book6.pdf" target="_blank">📖 قراءة الكتاب</a>
+    <a href="books/book6.pdf" download>⬇️ تحميل الكتاب</a>
+  </div>
+</div>
 
-    <div class="book">
-      <div class="book-title">هامات عالية وذرا – ديوان شعر</div>
-      <div class="actions">
-        <a href="books/book6.pdf" target="_blank">📖 قراءة الكتاب</a>
-        <a href="books/book6.pdf" download>⬇️ تحميل الكتاب</a>
-      </div>
-    </div>
   </div>
 </body>
 </html>
