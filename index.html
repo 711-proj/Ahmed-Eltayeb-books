@@ -11,10 +11,11 @@
     font-family: 'Cairo', sans-serif;
     background-color: #f9f9f9;
     color: #222;
+    perspective: 1500px; /* perspective عام على الصفحة */
   }
 
-  /* الغلاف - صفحة البداية */
-  .splash {
+  /* الغلاف */
+  #splash {
     position: fixed;
     top: 0; left: 0;
     width: 100%;
@@ -29,25 +30,21 @@
     user-select: none;
     z-index: 9999;
 
-    /* أساس الحركة */
-    transform-origin: top left; /* الركن العلوي الأيسر */
-    perspective: 1200px;
-    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+    /* مركز التحويل هو الركن العلوي الأيسر */
+    transform-origin: top left;
     transform-style: preserve-3d;
+
+    transition: transform 1s ease, opacity 1s ease;
   }
 
-  /* حركة طي الغلاف - يرفع من الركن كصفحة ورقية */
-  .splash.folded {
-    /* رفع الصفحة مع تدوير لتقليبها من الركن */
-    transform: 
-      translateZ(150px)        /* رفع للخارج ليبدو بارز */
-      rotateY(-85deg)          /* تدوير على المحور Y */
-      translateX(-30%);        /* تحريك أفقي للخارج */
+  /* حركة طي الغلاف - تقليب من الركن */
+  #splash.folded {
+    transform: rotateY(-85deg) translateX(-40%) translateZ(150px);
     opacity: 0;
     pointer-events: none;
   }
 
-  .splash::before {
+  #splash::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -55,7 +52,7 @@
     z-index: -1;
   }
 
-  .splash-header {
+  #splash .splash-header {
     font-size: 3rem;
     font-weight: 700;
     color: #004e7c;
@@ -65,19 +62,19 @@
   }
 
   /* الصفحة الرئيسية */
-  .main {
+  #main {
     display: none;
     padding: 2rem;
     text-align: center;
   }
 
-  .main h2 {
+  #main h2 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
   }
 
-  /* أزرار كتب ومقالات كبيرة جداً وأسفل بعض */
-  .main button {
+  /* أزرار كتب ومقالات كبيرة وأسفل بعض */
+  #main button {
     display: block;
     width: 80%;
     margin: 1.5rem auto;
@@ -92,12 +89,12 @@
     user-select: none;
   }
 
-  .main button:hover {
+  #main button:hover {
     background-color: #0077aa;
   }
 
   /* صفحة الكتب */
-  .books-page {
+  #booksPage {
     display: none;
     max-width: 800px;
     margin: 2rem auto;
@@ -111,11 +108,10 @@
     padding: 1.5rem 2rem;
     margin-bottom: 1.8rem;
     overflow: hidden;
-    transition: max-height 0.3s ease;
     position: relative;
   }
 
-  /* عناوين الكتب - كبيرة وواضحة */
+  /* عنوان الكتاب - كبير وواضح */
   .book-title {
     font-size: 2.8rem;
     font-weight: 700;
@@ -123,31 +119,30 @@
     color: #004e7c;
     user-select: none;
     position: relative;
-    padding-left: 4rem; /* مساحة للسهم على اليمين */
+    /* لا تضيف padding-left، لأن السهم سيكون بموقع مستقل */
     display: inline-block;
-    width: calc(100% - 4.5rem);
+    max-width: calc(100% - 4rem);
   }
 
   .book-title:hover {
     text-decoration: underline;
   }
 
-  /* السهم بعيد تمامًا على يمين العنوان */
-  .book-title::before {
-    content: "▼";
+  /* السهم - مستقل تماما على اليمين وليس داخلاً في العنوان */
+  .book-arrow {
     position: absolute;
-    right: 1.5rem; /* بعيد 1.5rem عن اليمين */
+    right: 1rem; /* يبعد 1rem عن الحافة اليمينية */
     top: 50%;
     transform: translateY(-50%);
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #0077aa;
-    transition: transform 0.3s ease;
-    pointer-events: none;
     user-select: none;
+    pointer-events: none;
+    transition: transform 0.3s ease;
   }
 
   /* تدوير السهم لأعلى عند فتح المحتويات */
-  .book-title.active::before {
+  .book-arrow.open {
     transform: translateY(-50%) rotate(-180deg);
   }
 
@@ -161,7 +156,7 @@
 
   /* قائمة محتويات الكتاب */
   .contents {
-    font-size: 2.3rem; /* كبير وواضح، أقل قليلاً من العنوان */
+    font-size: 2.3rem; /* كبير وواضح */
     max-height: 0;
     overflow: hidden;
     padding-top: 0;
@@ -192,22 +187,25 @@
 </head>
 <body>
 
-<div class="splash" id="splash" aria-label="صفحة الغلاف">
+<div id="splash" aria-label="صفحة الغلاف">
   <div class="splash-header">الكاتب / أحمد الطيب أحمد</div>
 </div>
 
-<div class="main" id="main" aria-label="الصفحة الرئيسية">
+<div id="main" aria-label="الصفحة الرئيسية">
   <h2>قائمة المحتويات</h2>
   <button onclick="showBooks()" aria-label="عرض الكتب">📚 كتب</button>
   <button aria-label="عرض المقالات">📰 مقالات</button>
 </div>
 
-<div class="books-page" id="booksPage" aria-label="صفحة الكتب">
+<div id="booksPage" aria-label="صفحة الكتب">
   <div class="book">
     <div class="download">
       <a href="الخلاف_بين_الصحابة_أحمد_الطيب_أحمد.pdf" download aria-label="تحميل كتاب الخلاف بين الصحابة">⬇️ تحميل الكتاب</a>
     </div>
-    <div class="book-title" onclick="toggleContents('book1')" role="button" tabindex="0" aria-expanded="false" aria-controls="book1">الخلاف بين الصحابة، والتأسيس لنظام حكم إسلامي</div>
+    <div class="book-title" tabindex="0" role="button" aria-expanded="false" aria-controls="book1">
+      الخلاف بين الصحابة، والتأسيس لنظام حكم إسلامي
+      <span class="book-arrow" aria-hidden="true">▼</span>
+    </div>
     <ul class="contents" id="book1" role="region" aria-hidden="true">
       <li><a href="contents/khilaf/01-muqaddima.html" target="_blank" rel="noopener">المقدمة</a></li>
       <li><a href="#">منهج الكتابة في الخلاف بين الصحابة</a></li>
@@ -234,94 +232,99 @@
     </ul>
   </div>
 
+  <!-- كتب أخرى بدون محتويات -->
   <div class="book">
-    <div class="download">
-      <a href="#" download>⬇️ تحميل الكتاب</a>
-    </div>
-    <div class="book-title" role="button" tabindex="0">السنة النبوية: قضايا ومرافعات</div>
+    <div class="download"><a href="#" download>⬇️ تحميل الكتاب</a></div>
+    <div class="book-title" tabindex="0" role="button">السنة النبوية: قضايا ومرافعات <span class="book-arrow" aria-hidden="true">▼</span></div>
   </div>
 
   <div class="book">
-    <div class="download">
-      <a href="#" download>⬇️ تحميل الكتاب</a>
-    </div>
-    <div class="book-title" role="button" tabindex="0">كتيب: إصلاح الصلاة وسجود السهو</div>
+    <div class="download"><a href="#" download>⬇️ تحميل الكتاب</a></div>
+    <div class="book-title" tabindex="0" role="button">كتيب: إصلاح الصلاة وسجود السهو <span class="book-arrow" aria-hidden="true">▼</span></div>
   </div>
 
   <div class="book">
-    <div class="download">
-      <a href="#" download>⬇️ تحميل الكتاب</a>
-    </div>
-    <div class="book-title" role="button" tabindex="0">كتيب: عمك الطيب ود أحمد</div>
+    <div class="download"><a href="#" download>⬇️ تحميل الكتاب</a></div>
+    <div class="book-title" tabindex="0" role="button">كتيب: عمك الطيب ود أحمد <span class="book-arrow" aria-hidden="true">▼</span></div>
   </div>
 
   <div class="book">
-    <div class="download">
-      <a href="#" download>⬇️ تحميل الكتاب</a>
-    </div>
-    <div class="book-title" role="button" tabindex="0">سرادب الأحلام – ديوان شعر</div>
+    <div class="download"><a href="#" download>⬇️ تحميل الكتاب</a></div>
+    <div class="book-title" tabindex="0" role="button">سرادب الأحلام – ديوان شعر <span class="book-arrow" aria-hidden="true">▼</span></div>
   </div>
 
   <div class="book">
-    <div class="download">
-      <a href="#" download>⬇️ تحميل الكتاب</a>
-    </div>
-    <div class="book-title" role="button" tabindex="0">هامات عالية وذرا – ديوان شعر</div>
+    <div class="download"><a href="#" download>⬇️ تحميل الكتاب</a></div>
+    <div class="book-title" tabindex="0" role="button">هامات عالية وذرا – ديوان شعر <span class="book-arrow" aria-hidden="true">▼</span></div>
   </div>
 </div>
 
 <script>
-  // دالة إخفاء الغلاف ورفع الصفحة بطي مع 3D rotateY
+  const splash = document.getElementById('splash');
+  const main = document.getElementById('main');
+  const booksPage = document.getElementById('booksPage');
+
   function closeSplashAndShowMain() {
-    const splash = document.getElementById("splash");
-    splash.classList.add("folded");
-    history.pushState({ page: 'main' }, '', '');
+    splash.classList.add('folded');
+    history.pushState({page: 'main'}, '', '');
     setTimeout(() => {
-      splash.style.display = "none";
-      document.getElementById("main").style.display = "block";
+      splash.style.display = 'none';
+      main.style.display = 'block';
     }, 1000);
   }
 
-  const splash = document.getElementById("splash");
   splash.addEventListener('click', closeSplashAndShowMain);
   splash.addEventListener('touchstart', closeSplashAndShowMain);
 
   function showBooks() {
-    history.pushState({ page: 'books' }, '', '');
-    document.getElementById("main").style.display = "none";
-    document.getElementById("booksPage").style.display = "block";
+    history.pushState({page: 'books'}, '', '');
+    main.style.display = 'none';
+    booksPage.style.display = 'block';
   }
 
-  window.addEventListener('popstate', function (event) {
-    if (event.state && event.state.page === 'main') {
-      document.getElementById("booksPage").style.display = "none";
-      document.getElementById("main").style.display = "block";
+  window.addEventListener('popstate', (event) => {
+    if(event.state && event.state.page === 'main') {
+      booksPage.style.display = 'none';
+      main.style.display = 'block';
     } else {
-      document.getElementById("main").style.display = "none";
-      document.getElementById("booksPage").style.display = "none";
-      document.getElementById("splash").style.display = "flex";
+      main.style.display = 'none';
+      booksPage.style.display = 'none';
+      splash.style.display = 'flex';
     }
   });
 
+  // وظيفة التوسيع مع السهم
   function toggleContents(id) {
-    const el = document.getElementById(id);
-    const title = el.previousElementSibling;
+    const contents = document.getElementById(id);
+    if (!contents) return;
 
-    const isActive = el.classList.toggle("active");
-    title.classList.toggle("active", isActive);
+    const bookDiv = contents.parentElement;
+    const title = bookDiv.querySelector('.book-title');
+    const arrow = title.querySelector('.book-arrow');
 
-    // تحديث aria-expanded و aria-hidden لتحسين الوصول
+    const isActive = contents.classList.toggle('active');
     if (isActive) {
       title.setAttribute('aria-expanded', 'true');
-      el.setAttribute('aria-hidden', 'false');
+      contents.setAttribute('aria-hidden', 'false');
+      arrow.classList.add('open');
     } else {
       title.setAttribute('aria-expanded', 'false');
-      el.setAttribute('aria-hidden', 'true');
+      contents.setAttribute('aria-hidden', 'true');
+      arrow.classList.remove('open');
     }
   }
 
-  // دعم تحريك بالكيبورد لعنوان الكتاب (Enter و Space)
-  document.querySelectorAll('.book-title[role="button"]').forEach(title => {
+  // ربط النقر لعناوين الكتب التي تحتوي على محتويات فقط
+  document.querySelectorAll('.book-title').forEach(title => {
+    title.addEventListener('click', () => {
+      const bookDiv = title.parentElement;
+      const contents = bookDiv.querySelector('.contents');
+      if (contents) {
+        toggleContents(contents.id);
+      }
+    });
+
+    // دعم الكيبورد (Enter و Space)
     title.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
