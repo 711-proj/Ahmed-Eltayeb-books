@@ -14,7 +14,8 @@
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: #fff;
+  background: #fff url('background-pattern.jpg') center center no-repeat;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,6 +27,23 @@
 .splash.lift {
   transform: translateY(-100%);
   opacity: 0;
+}
+
+.splash::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255,255,255,0.85);
+  z-index: -1;
+}
+
+.splash-header {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #004e7c;
 }
 
 .splash img {
@@ -40,12 +58,6 @@
   font-size: 1.1rem;
   line-height: 2;
   padding: 1rem;
-}
-
-.highlight {
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-top: 1rem;
 }
 
 .main {
@@ -125,6 +137,7 @@
   </style>
 </head>
 <body><div class="splash" id="splash">
+  <div class="splash-header">الكاتب / أحمد الطيب أحمد</div>
   <img src="original.jpg" alt="صورة الكاتب">
   <div class="splash-text">
     <p>ولد بقرية الحصايا وهي من أعمال الدامر، عاصمة ولاية نهر النيل.</p>
@@ -136,7 +149,6 @@
     <p>عمل رئيس مجلس إدارة صحيفة "الحياة" السياسية اليومية التي كانت تصدر في الخرطوم.</p>
     <p>عمل مديراً للإدارة العامة لمعرض الخرطوم الدولي.</p>
     <p>عمل مديرا عاماً ورئيساً لمجلس إدارة شركة آكام الفنية الحديثة.</p>
-    <p class="highlight">للإطلاع على مؤلفاته:</p>
   </div>
 </div><div class="main" id="main">
   <h2>قائمة المحتويات</h2>
@@ -150,6 +162,27 @@
     <div class="book-title" onclick="toggleContents('book1')">الخلاف بين الصحابة، والتأسيس لنظام حكم إسلامي</div>
     <ul class="contents" id="book1">
       <li><a href="contents/khilaf/01-muqaddima.html" target="_blank">المقدمة</a></li>
+      <li><a href="#">منهج الكتابة في الخلاف بين الصحابة</a></li>
+      <li><a href="#">الباب الأول: النصوص والسوابق</a></li>
+      <li><a href="#">الفصل الأول: ولاية الأمر في الكتاب والسنة</a></li>
+      <li><a href="#">الفصل الثاني: عهد النبوة</a></li>
+      <li><a href="#">الفصل الثالث: بيعة أبي بكر</a></li>
+      <li><a href="#">الفصل الرابع: بيعة أبي بكر - إختيار أم استخلاف؟</a></li>
+      <li><a href="#">الفصل الخامس: استخلاف عمر</a></li>
+      <li><a href="#">الفصل السادس: العهد إلى الستة</a></li>
+      <li><a href="#">الباب الثاني: الفتن والملاحم</a></li>
+      <li><a href="#">الفصل الأول: الثورة على عثمان</a></li>
+      <li><a href="#">الفصل الثاني: ولاية عثمان ومقتله: دروس وعبر</a></li>
+      <li><a href="#">الفصل الثالث: بيعة علي</a></li>
+      <li><a href="#">الفصل الرابع: نهج جديد في اختيار الخليفة</a></li>
+      <li><a href="#">الفصل الخامس: وقعة الجمل</a></li>
+      <li><a href="#">الفصل السادس: بين علي ومعاوية</a></li>
+      <li><a href="#">الفصل السابع: صفين والتحكيم</a></li>
+      <li><a href="#">الفصل الثامن: نهاية الخلافة الراشدة، دروس وعبر</a></li>
+      <li><a href="#">الباب الثالث: التأسيس لنظام سياسي إسلامي</a></li>
+      <li><a href="#">الفصل الأول: مرجعية النظام</a></li>
+      <li><a href="#">الفصل الثاني: نشأة الفكر السياسي الإسلامي</a></li>
+      <li><a href="#">الفصل الثالث: الملامح العامة للنظام السياسي الإسلامي</a></li>
     </ul>
   </div>  <div class="book">
     <div class="download">
