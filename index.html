@@ -1,141 +1,148 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <title>مكتبة أحمد الطيب أحمد</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap');body {
+  margin: 0;
+  font-family: 'Cairo', sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+}
 
-    body {
-      margin: 0;
-      font-family: 'Cairo', sans-serif;
-      background-color: #f9f9f9;
-      color: #222;
-    }
+.splash {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('background-pattern.jpg') center center no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 9999;
+  padding-right: 3rem;
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+}
 
-    /* صفحة الغلاف */
-    .splash {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url('background-pattern.jpg') center center no-repeat;
-      background-size: cover;
-      display: flex;
-      justify-content: flex-end; /* لوضع النص على اليمين */
-      align-items: center;
-      z-index: 9999;
-      padding-right: 3rem;
-      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
-    }
+.splash.lift {
+  transform: translateY(-100%);
+  opacity: 0;
+}
 
-    .splash.lift {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
+.splash::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255,255,255,0.85);
+  z-index: -1;
+}
 
-    .splash::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-color: rgba(255,255,255,0.85); /* خلفية شفافة لتخفيف الصورة */
-      z-index: -1;
-    }
+.splash-header {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #004e7c;
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+}
 
-    .splash-header {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #004e7c;
-      text-align: right;
-    }
+.main {
+  display: none;
+  padding: 2rem;
+  text-align: center;
+}
 
-    .main {
-      display: none;
-      padding: 2rem;
-      text-align: center;
-    }
+.main h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
 
-    .main h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
+.main button {
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #004e7c;
+  color: white;
+  cursor: pointer;
+  display: block;
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+}
 
-    .main button {
-      font-size: 1.2rem;
-      padding: 0.8rem 1.5rem;
-      margin: 1rem;
-      border: none;
-      border-radius: 8px;
-      background-color: #004e7c;
-      color: white;
-      cursor: pointer;
-    }
+.main button:hover {
+  background-color: #0077aa;
+}
 
-    .main button:hover {
-      background-color: #0077aa;
-    }
+.books-page {
+  display: none;
+  max-width: 800px;
+  margin: 2rem auto;
+}
 
-    .books-page {
-      display: none;
-      max-width: 800px;
-      margin: 2rem auto;
-    }
+.book {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
 
-    .book {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-    }
+.book-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #004e7c;
+  position: relative;
+}
 
-    .book-title {
-      font-size: 1.3rem;
-      font-weight: bold;
-      cursor: pointer;
-      color: #004e7c;
-    }
+.book-title::before {
+  content: "\25BC";
+  position: absolute;
+  right: -2rem;
+  font-size: 1.8rem;
+  color: #004e7c;
+}
 
-    .book-title:hover {
-      text-decoration: underline;
-    }
+.book-title:hover {
+  text-decoration: underline;
+}
 
-    .download {
-      float: left;
-      margin-right: 1rem;
-      font-size: 1.1rem;
-    }
+.download {
+  float: left;
+  margin-right: 1rem;
+  font-size: 1.3rem;
+}
 
-    .contents {
-      display: none;
-      padding-top: 1rem;
-    }
+.contents {
+  display: none;
+  padding-top: 1rem;
+  font-size: 2rem;
+}
 
-    .contents li {
-      list-style: disc;
-      margin: 0.4rem 0;
-      padding-right: 1rem;
-      text-align: right;
-    }
+.contents li {
+  list-style: disc;
+  margin: 0.4rem 0;
+  padding-right: 1rem;
+  text-align: right;
+}
 
-    .contents a {
-      text-decoration: none;
-      color: #0077aa;
-    }
+.contents a {
+  text-decoration: none;
+  color: #0077aa;
+}
+
   </style>
 </head>
-<body>
-
-<div class="splash" id="splash">
+<body><div class="splash" id="splash">
   <div class="splash-header">الكاتب / أحمد الطيب أحمد</div>
-</div>
-
-<div class="main" id="main">
+</div><div class="main" id="main">
   <h2>قائمة المحتويات</h2>
   <button onclick="showBooks()">📚 كتب</button>
   <button>📰 مقالات</button>
-</div>
-
-<div class="books-page" id="booksPage">
+</div><div class="books-page" id="booksPage">
   <div class="book">
     <div class="download">
       <a href="الخلاف_بين_الصحابة_أحمد_الطيب_أحمد.pdf" download>⬇️ تحميل الكتاب</a>
@@ -165,46 +172,34 @@
       <li><a href="#">الفصل الثاني: نشأة الفكر السياسي الإسلامي</a></li>
       <li><a href="#">الفصل الثالث: الملامح العامة للنظام السياسي الإسلامي</a></li>
     </ul>
-  </div>
-
-  <div class="book">
+  </div>  <div class="book">
     <div class="download">
       <a href="#" download>⬇️ تحميل الكتاب</a>
     </div>
     <div class="book-title">السنة النبوية: قضايا ومرافعات</div>
-  </div>
-
-  <div class="book">
+  </div>  <div class="book">
     <div class="download">
       <a href="#" download>⬇️ تحميل الكتاب</a>
     </div>
     <div class="book-title">كتيب: إصلاح الصلاة وسجود السهو</div>
-  </div>
-
-  <div class="book">
+  </div>  <div class="book">
     <div class="download">
       <a href="#" download>⬇️ تحميل الكتاب</a>
     </div>
     <div class="book-title">كتيب: عمك الطيب ود أحمد</div>
-  </div>
-
-  <div class="book">
+  </div>  <div class="book">
     <div class="download">
       <a href="#" download>⬇️ تحميل الكتاب</a>
     </div>
     <div class="book-title">سرادب الأحلام – ديوان شعر</div>
-  </div>
-
-  <div class="book">
+  </div>  <div class="book">
     <div class="download">
       <a href="#" download>⬇️ تحميل الكتاب</a>
     </div>
     <div class="book-title">هامات عالية وذرا – ديوان شعر</div>
   </div>
-</div>
-
-<script>
-  document.addEventListener('click', function handleSplashClick() {
+</div><script>
+  function hideSplash() {
     const splash = document.getElementById("splash");
     splash.classList.add("lift");
     history.pushState({ page: 'main' }, '', '');
@@ -212,8 +207,11 @@
       splash.style.display = "none";
       document.getElementById("main").style.display = "block";
     }, 1000);
-    document.removeEventListener('click', handleSplashClick);
-  });
+  }
+
+  document.getElementById("splash").addEventListener("click", hideSplash);
+  document.getElementById("splash").addEventListener("touchstart", hideSplash);
+  document.getElementById("splash").addEventListener("touchmove", hideSplash);
 
   function showBooks() {
     history.pushState({ page: 'books' }, '', '');
@@ -228,14 +226,20 @@
     } else {
       document.getElementById("main").style.display = "none";
       document.getElementById("booksPage").style.display = "none";
-      document.getElementById("splash").style.display = "flex";
+      const splash = document.getElementById("splash");
+      splash.style.display = "flex";
+      splash.classList.remove("lift");
     }
   });
 
   function toggleContents(id) {
     const el = document.getElementById(id);
-    el.style.display = el.style.display === "none" ? "block" : "none";
+    if (el.style.display === "block") {
+      el.style.display = "none";
+    } else {
+      document.querySelectorAll('.contents').forEach(c => c.style.display = 'none');
+      el.style.display = "block";
+    }
   }
-</script>
-</body>
+</script></body>
 </html>
