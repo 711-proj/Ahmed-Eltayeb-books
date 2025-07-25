@@ -25,14 +25,18 @@
       z-index: 9999;
       transition: transform 1s ease-in-out, opacity 1s ease-in-out;
       padding-right: 3rem;
-      cursor: pointer; /* اجعل المؤشر يشير أنه يمكن التفاعل */
-      user-select: none; /* منع التحديد غير المقصود */
+      cursor: pointer;
+      user-select: none;
+      transform-origin: top left;
+      perspective: 1500px;
+      /* وضع بداية ثابته */
+      transform-style: preserve-3d;
     }
 
-    .splash.lift {
-      transform: translateY(-100%);
+    .splash.folded {
+      transform: rotateY(-90deg) translateX(-100%);
       opacity: 0;
-      pointer-events: none; /* لتعطيل التفاعل أثناء الانزلاق */
+      pointer-events: none;
     }
 
     .splash::before {
@@ -101,10 +105,33 @@
       cursor: pointer;
       color: #004e7c;
       user-select: none;
+      position: relative;
+      padding-left: 1.8rem; /* ترك مساحة للسهم */
+      /* لتمكين تراكب العنصر ::before */
+      display: inline-block;
+      width: calc(100% - 2rem);
     }
 
     .book-title:hover {
       text-decoration: underline;
+    }
+
+    /* سهم بجانب عنوان الكتاب */
+    .book-title::before {
+      content: "▼"; /* سهم للأسفل */
+      position: absolute;
+      right: 0.4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: #0077aa;
+      transition: transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    /* عند فتح المحتويات يدور السهم لأعلى */
+    .book-title.active::before {
+      transform: translateY(-50%) rotate(-180deg);
     }
 
     .download {
@@ -114,15 +141,15 @@
     }
 
     .contents {
+      font-size: 1.4rem; /* أصغر قليلاً من عنوان الكتاب */
       max-height: 0;
       overflow: hidden;
       padding-top: 0;
       transition: max-height 0.4s ease, padding-top 0.4s ease;
     }
 
-    /* عند وجود الكلاس active تظهر القائمة */
     .contents.active {
-      max-height: 2000px; /* قيمة كبيرة كافية لعرض المحتوى */
+      max-height: 2000px;
       padding-top: 1rem;
     }
 
@@ -222,7 +249,7 @@
 <script>
   function closeSplashAndShowMain() {
     const splash = document.getElementById("splash");
-    splash.classList.add("lift");
+    splash.classList.add("folded");
     history.pushState({ page: 'main' }, '', '');
     setTimeout(() => {
       splash.style.display = "none";
@@ -230,7 +257,6 @@
     }, 1000);
   }
 
-  // تفعيل الإغلاق على الضغط أو السحب (لمس)
   const splash = document.getElementById("splash");
   splash.addEventListener('click', closeSplashAndShowMain);
   splash.addEventListener('touchstart', closeSplashAndShowMain);
@@ -254,8 +280,15 @@
 
   function toggleContents(id) {
     const el = document.getElementById(id);
-    el.classList.toggle("active");
+    const title = el.previousElementSibling;
+    const isActive = el.classList.toggle("active");
+    if (isActive) {
+      title.classList.add("active");
+    } else {
+      title.classList.remove("active");
+    }
   }
 </script>
+
 </body>
 </html>
