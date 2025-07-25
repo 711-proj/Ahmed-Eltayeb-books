@@ -19,14 +19,24 @@
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to bottom right, #ffffff, #eeeeee);
+      background: url('background-pattern.jpg') center center no-repeat;
+      background-size: cover;
       display: flex;
-      justify-content: flex-end;
-      align-items: center;
+      justify-content: flex-end; /* لليمين */
+      align-items: center;        /* منتصف الشاشة عمودياً */
       padding-right: 3rem;
-      cursor: pointer;
       z-index: 9999;
+      cursor: pointer;
       transition: opacity 0.8s ease;
+    }
+
+    /* فلتر لتخفيف الصورة */
+    #splash::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgba(255, 255, 255, 0.75); /* شفافية خلفية ناعمة */
+      z-index: -1;
     }
 
     #splash.hidden {
@@ -39,9 +49,9 @@
       font-weight: 700;
       color: #004e7c;
       text-align: right;
+      user-select: none;
     }
 
-    /* الصفحة الرئيسية */
     #main {
       display: none;
       padding: 2rem;
@@ -70,7 +80,6 @@
       background-color: #0077aa;
     }
 
-    /* صفحة الكتب */
     #booksPage {
       display: none;
       max-width: 800px;
@@ -179,31 +188,6 @@
       <li><a href="#">الفصل الثالث: الملامح العامة للنظام السياسي الإسلامي</a></li>
     </ul>
   </div>
-
-  <div class="book">
-    <div class="download"><a href="#" download>⬇️ تحميل الكتاب</a></div>
-    <div class="book-title">السنة النبوية: قضايا ومرافعات</div>
-  </div>
-
-  <div class="book">
-    <div class="download"><a href="#" download>⬇️ تحميل الكتاب</a></div>
-    <div class="book-title">كتيب: إصلاح الصلاة وسجود السهو</div>
-  </div>
-
-  <div class="book">
-    <div class="download"><a href="#" download>⬇️ تحميل الكتاب</a></div>
-    <div class="book-title">كتيب: عمك الطيب ود أحمد</div>
-  </div>
-
-  <div class="book">
-    <div class="download"><a href="#" download>⬇️ تحميل الكتاب</a></div>
-    <div class="book-title">سرادب الأحلام – ديوان شعر</div>
-  </div>
-
-  <div class="book">
-    <div class="download"><a href="#" download>⬇️ تحميل الكتاب</a></div>
-    <div class="book-title">هامات عالية وذرا – ديوان شعر</div>
-  </div>
 </div>
 
 <script>
@@ -211,7 +195,6 @@
   const main = document.getElementById('main');
   const booksPage = document.getElementById('booksPage');
 
-  // إخفاء الغلاف
   function hideSplash() {
     splash.classList.add('hidden');
     history.pushState({ page: 'main' }, '', '');
@@ -225,14 +208,12 @@
   splash.addEventListener('touchstart', hideSplash);
   splash.addEventListener('touchmove', hideSplash);
 
-  // عرض صفحة الكتب
   function showBooks() {
     history.pushState({ page: 'books' }, '', '');
     main.style.display = 'none';
     booksPage.style.display = 'block';
   }
 
-  // زر الرجوع
   window.addEventListener('popstate', (event) => {
     if (event.state && event.state.page === 'main') {
       booksPage.style.display = 'none';
@@ -250,7 +231,6 @@
     }
   });
 
-  // توسيع قائمة المحتويات
   function toggleContents(id) {
     const el = document.getElementById(id);
     if (!el) return;
