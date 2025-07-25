@@ -11,7 +11,7 @@
     font-family: 'Cairo', sans-serif;
     background-color: #f9f9f9;
     color: #222;
-    perspective: 1500px; /* perspective عام على الصفحة */
+    perspective: 1500px; /* لتأثير 3D */
   }
 
   /* الغلاف */
@@ -23,42 +23,34 @@
     background: #fff url('background-pattern.jpg') center center no-repeat;
     background-size: cover;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end; /* العنصر في اليمين */
     align-items: center;
     padding-right: 3rem;
     cursor: pointer;
     user-select: none;
     z-index: 9999;
 
-    /* مركز التحويل هو الركن العلوي الأيسر */
     transform-origin: top left;
     transform-style: preserve-3d;
 
     transition: transform 1s ease, opacity 1s ease;
   }
 
-  /* حركة طي الغلاف - تقليب من الركن */
+  /* حركة طي الغلاف: رفع وتقليب من الركن */
   #splash.folded {
     transform: rotateY(-85deg) translateX(-40%) translateZ(150px);
     opacity: 0;
     pointer-events: none;
   }
 
-  #splash::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: rgba(255,255,255,0.85);
-    z-index: -1;
-  }
-
+  /* نص الكاتب في منتصف الشاشة على اليمين */
   #splash .splash-header {
     font-size: 3rem;
     font-weight: 700;
     color: #004e7c;
     text-align: right;
-    margin-right: 1rem;
     user-select: none;
+    /* وسط عمودي */
   }
 
   /* الصفحة الرئيسية */
@@ -119,7 +111,6 @@
     color: #004e7c;
     user-select: none;
     position: relative;
-    /* لا تضيف padding-left، لأن السهم سيكون بموقع مستقل */
     display: inline-block;
     max-width: calc(100% - 4rem);
   }
@@ -156,7 +147,7 @@
 
   /* قائمة محتويات الكتاب */
   .contents {
-    font-size: 2.3rem; /* كبير وواضح */
+    font-size: 2.3rem;
     max-height: 0;
     overflow: hidden;
     padding-top: 0;
@@ -232,7 +223,6 @@
     </ul>
   </div>
 
-  <!-- كتب أخرى بدون محتويات -->
   <div class="book">
     <div class="download"><a href="#" download>⬇️ تحميل الكتاب</a></div>
     <div class="book-title" tabindex="0" role="button">السنة النبوية: قضايا ومرافعات <span class="book-arrow" aria-hidden="true">▼</span></div>
@@ -264,36 +254,47 @@
   const main = document.getElementById('main');
   const booksPage = document.getElementById('booksPage');
 
-  function closeSplashAndShowMain() {
+  // دالة تطوى الغلاف وتنتقل للصفحة الرئيسية
+  function foldSplash() {
+    if (splash.classList.contains('folded')) return; // منع تكرار التنفيذ
     splash.classList.add('folded');
-    history.pushState({page: 'main'}, '', '');
+    history.pushState({ page: 'main' }, '', '');
     setTimeout(() => {
       splash.style.display = 'none';
       main.style.display = 'block';
     }, 1000);
   }
 
-  splash.addEventListener('click', closeSplashAndShowMain);
-  splash.addEventListener('touchstart', closeSplashAndShowMain);
+  // طي الغلاف عند أي لمس، أو سحب (touchstart، touchmove)، أو نقرة (click)
+  splash.addEventListener('click', foldSplash);
+  splash.addEventListener('touchstart', foldSplash);
+  splash.addEventListener('touchmove', foldSplash);
 
+  // عرض صفحة الكتب
   function showBooks() {
-    history.pushState({page: 'books'}, '', '');
+    history.pushState({ page: 'books' }, '', '');
     main.style.display = 'none';
     booksPage.style.display = 'block';
   }
 
+  // التعامل مع زر الرجوع في المتصفح
   window.addEventListener('popstate', (event) => {
-    if(event.state && event.state.page === 'main') {
+    if (event.state && event.state.page === 'main') {
       booksPage.style.display = 'none';
       main.style.display = 'block';
+    } else if (event.state && event.state.page === 'books') {
+      main.style.display = 'none';
+      booksPage.style.display = 'block';
     } else {
+      // الافتراضي: صفحة الغلاف
       main.style.display = 'none';
       booksPage.style.display = 'none';
       splash.style.display = 'flex';
+      splash.classList.remove('folded');
     }
   });
 
-  // وظيفة التوسيع مع السهم
+  // توسيع/طي محتويات الكتب مع تدوير السهم
   function toggleContents(id) {
     const contents = document.getElementById(id);
     if (!contents) return;
@@ -314,7 +315,7 @@
     }
   }
 
-  // ربط النقر لعناوين الكتب التي تحتوي على محتويات فقط
+  // ربط حدث النقر لعناوين الكتب التي تحتوي على محتويات فقط
   document.querySelectorAll('.book-title').forEach(title => {
     title.addEventListener('click', () => {
       const bookDiv = title.parentElement;
