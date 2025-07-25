@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>مكتبة أحمد الطيب أحمد</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap');
@@ -13,90 +13,83 @@
       color: #222;
     }
 
-    /* الغلاف */
-    #splash {
+    /* صفحة الغلاف */
+    .splash {
       position: fixed;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       background: url('background-pattern.jpg') center center no-repeat;
       background-size: cover;
       display: flex;
-      justify-content: flex-end; /* لليمين */
-      align-items: center;        /* منتصف الشاشة عمودياً */
-      padding-right: 3rem;
+      justify-content: flex-end; /* لوضع النص على اليمين */
+      align-items: center;
       z-index: 9999;
-      cursor: pointer;
-      transition: opacity 0.8s ease;
+      padding-right: 3rem;
+      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
     }
 
-    /* فلتر لتخفيف الصورة */
-    #splash::before {
-      content: '';
+    .splash.lift {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+
+    .splash::before {
+      content: "";
       position: absolute;
       inset: 0;
-      background-color: rgba(255, 255, 255, 0.75); /* شفافية خلفية ناعمة */
+      background-color: rgba(255,255,255,0.85); /* خلفية شفافة لتخفيف الصورة */
       z-index: -1;
     }
 
-    #splash.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    #splash .splash-header {
-      font-size: 3rem;
-      font-weight: 700;
+    .splash-header {
+      font-size: 2.5rem;
+      font-weight: bold;
       color: #004e7c;
       text-align: right;
-      user-select: none;
     }
 
-    #main {
+    .main {
       display: none;
       padding: 2rem;
       text-align: center;
     }
 
-    #main h2 {
-      font-size: 2.5rem;
+    .main h2 {
+      font-size: 2rem;
       margin-bottom: 2rem;
     }
 
-    #main button {
-      display: block;
-      width: 80%;
-      margin: 1.5rem auto;
-      font-size: 5rem;
-      padding: 1.8rem 0;
+    .main button {
+      font-size: 1.2rem;
+      padding: 0.8rem 1.5rem;
+      margin: 1rem;
       border: none;
-      border-radius: 12px;
+      border-radius: 8px;
       background-color: #004e7c;
       color: white;
       cursor: pointer;
     }
 
-    #main button:hover {
+    .main button:hover {
       background-color: #0077aa;
     }
 
-    #booksPage {
+    .books-page {
       display: none;
       max-width: 800px;
       margin: 2rem auto;
-      padding: 0 1rem;
     }
 
     .book {
       background-color: white;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      padding: 1.5rem 2rem;
-      margin-bottom: 2rem;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .book-title {
-      font-size: 2.8rem;
+      font-size: 1.3rem;
       font-weight: bold;
       cursor: pointer;
       color: #004e7c;
@@ -109,60 +102,45 @@
     .download {
       float: left;
       margin-right: 1rem;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
     }
 
     .contents {
-      font-size: 2.3rem;
-      max-height: 0;
-      overflow: hidden;
-      padding-top: 0;
-      transition: max-height 0.4s ease, padding-top 0.4s ease;
-      clear: both;
-    }
-
-    .contents.active {
-      max-height: 2500px;
+      display: none;
       padding-top: 1rem;
     }
 
     .contents li {
       list-style: disc;
-      margin: 0.7rem 0;
-      padding-right: 1.5rem;
+      margin: 0.4rem 0;
+      padding-right: 1rem;
       text-align: right;
     }
 
     .contents a {
       text-decoration: none;
       color: #0077aa;
-      font-weight: 600;
     }
   </style>
 </head>
 <body>
 
-<!-- صفحة الغلاف -->
-<div id="splash">
+<div class="splash" id="splash">
   <div class="splash-header">الكاتب / أحمد الطيب أحمد</div>
 </div>
 
-<!-- الصفحة الرئيسية -->
-<div id="main">
+<div class="main" id="main">
   <h2>قائمة المحتويات</h2>
   <button onclick="showBooks()">📚 كتب</button>
   <button>📰 مقالات</button>
 </div>
 
-<!-- صفحة الكتب -->
-<div id="booksPage">
+<div class="books-page" id="booksPage">
   <div class="book">
     <div class="download">
       <a href="الخلاف_بين_الصحابة_أحمد_الطيب_أحمد.pdf" download>⬇️ تحميل الكتاب</a>
     </div>
-    <div class="book-title" onclick="toggleContents('book1')">
-      الخلاف بين الصحابة، والتأسيس لنظام حكم إسلامي
-    </div>
+    <div class="book-title" onclick="toggleContents('book1')">الخلاف بين الصحابة، والتأسيس لنظام حكم إسلامي</div>
     <ul class="contents" id="book1">
       <li><a href="contents/khilaf/01-muqaddima.html" target="_blank">المقدمة</a></li>
       <li><a href="#">منهج الكتابة في الخلاف بين الصحابة</a></li>
@@ -188,55 +166,76 @@
       <li><a href="#">الفصل الثالث: الملامح العامة للنظام السياسي الإسلامي</a></li>
     </ul>
   </div>
+
+  <div class="book">
+    <div class="download">
+      <a href="#" download>⬇️ تحميل الكتاب</a>
+    </div>
+    <div class="book-title">السنة النبوية: قضايا ومرافعات</div>
+  </div>
+
+  <div class="book">
+    <div class="download">
+      <a href="#" download>⬇️ تحميل الكتاب</a>
+    </div>
+    <div class="book-title">كتيب: إصلاح الصلاة وسجود السهو</div>
+  </div>
+
+  <div class="book">
+    <div class="download">
+      <a href="#" download>⬇️ تحميل الكتاب</a>
+    </div>
+    <div class="book-title">كتيب: عمك الطيب ود أحمد</div>
+  </div>
+
+  <div class="book">
+    <div class="download">
+      <a href="#" download>⬇️ تحميل الكتاب</a>
+    </div>
+    <div class="book-title">سرادب الأحلام – ديوان شعر</div>
+  </div>
+
+  <div class="book">
+    <div class="download">
+      <a href="#" download>⬇️ تحميل الكتاب</a>
+    </div>
+    <div class="book-title">هامات عالية وذرا – ديوان شعر</div>
+  </div>
 </div>
 
 <script>
-  const splash = document.getElementById('splash');
-  const main = document.getElementById('main');
-  const booksPage = document.getElementById('booksPage');
-
-  function hideSplash() {
-    splash.classList.add('hidden');
+  document.addEventListener('click', function handleSplashClick() {
+    const splash = document.getElementById("splash");
+    splash.classList.add("lift");
     history.pushState({ page: 'main' }, '', '');
     setTimeout(() => {
-      splash.style.display = 'none';
-      main.style.display = 'block';
-    }, 800);
-  }
-
-  splash.addEventListener('click', hideSplash);
-  splash.addEventListener('touchstart', hideSplash);
-  splash.addEventListener('touchmove', hideSplash);
+      splash.style.display = "none";
+      document.getElementById("main").style.display = "block";
+    }, 1000);
+    document.removeEventListener('click', handleSplashClick);
+  });
 
   function showBooks() {
     history.pushState({ page: 'books' }, '', '');
-    main.style.display = 'none';
-    booksPage.style.display = 'block';
+    document.getElementById("main").style.display = "none";
+    document.getElementById("booksPage").style.display = "block";
   }
 
-  window.addEventListener('popstate', (event) => {
+  window.addEventListener('popstate', function (event) {
     if (event.state && event.state.page === 'main') {
-      booksPage.style.display = 'none';
-      main.style.display = 'block';
-      splash.style.display = 'none';
-    } else if (event.state && event.state.page === 'books') {
-      main.style.display = 'none';
-      booksPage.style.display = 'block';
-      splash.style.display = 'none';
+      document.getElementById("booksPage").style.display = "none";
+      document.getElementById("main").style.display = "block";
     } else {
-      main.style.display = 'none';
-      booksPage.style.display = 'none';
-      splash.style.display = 'flex';
-      splash.classList.remove('hidden');
+      document.getElementById("main").style.display = "none";
+      document.getElementById("booksPage").style.display = "none";
+      document.getElementById("splash").style.display = "flex";
     }
   });
 
   function toggleContents(id) {
     const el = document.getElementById(id);
-    if (!el) return;
-    el.classList.toggle('active');
+    el.style.display = el.style.display === "none" ? "block" : "none";
   }
 </script>
-
 </body>
 </html>
