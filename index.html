@@ -11,7 +11,7 @@
     font-family: 'Cairo', sans-serif;
     background-color: #f9f9f9;
     color: #222;
-    perspective: 1500px; /* لتأثير 3D */
+    perspective: 1500px;
   }
 
   /* الغلاف */
@@ -23,8 +23,8 @@
     background: #fff url('background-pattern.jpg') center center no-repeat;
     background-size: cover;
     display: flex;
-    justify-content: flex-end; /* العنصر في اليمين */
-    align-items: center;
+    justify-content: flex-end; /* اقصى اليمين */
+    align-items: center;       /* وسط عمودي */
     padding-right: 3rem;
     cursor: pointer;
     user-select: none;
@@ -36,13 +36,6 @@
     transition: transform 1s ease, opacity 1s ease;
   }
 
-  /* حركة طي الغلاف: رفع وتقليب من الركن */
-  #splash.folded {
-    transform: rotateY(-85deg) translateX(-40%) translateZ(150px);
-    opacity: 0;
-    pointer-events: none;
-  }
-
   /* نص الكاتب في منتصف الشاشة على اليمين */
   #splash .splash-header {
     font-size: 3rem;
@@ -50,7 +43,15 @@
     color: #004e7c;
     text-align: right;
     user-select: none;
-    /* وسط عمودي */
+    /* لنص يظهر بالضبط في منتصف ارتفاع الشاشة على اليمين */
+    max-width: 60vw;
+  }
+
+  /* حركة طي الغلاف: رفع وتقليب من الركن */
+  #splash.folded {
+    transform: rotateY(-85deg) translateX(-40%) translateZ(150px);
+    opacity: 0;
+    pointer-events: none;
   }
 
   /* الصفحة الرئيسية */
@@ -254,9 +255,8 @@
   const main = document.getElementById('main');
   const booksPage = document.getElementById('booksPage');
 
-  // دالة تطوى الغلاف وتنتقل للصفحة الرئيسية
   function foldSplash() {
-    if (splash.classList.contains('folded')) return; // منع تكرار التنفيذ
+    if (splash.classList.contains('folded')) return;
     splash.classList.add('folded');
     history.pushState({ page: 'main' }, '', '');
     setTimeout(() => {
@@ -265,19 +265,17 @@
     }, 1000);
   }
 
-  // طي الغلاف عند أي لمس، أو سحب (touchstart، touchmove)، أو نقرة (click)
+  // الطي عند أي ضغط أو سحب على الشاشة
   splash.addEventListener('click', foldSplash);
   splash.addEventListener('touchstart', foldSplash);
   splash.addEventListener('touchmove', foldSplash);
 
-  // عرض صفحة الكتب
   function showBooks() {
     history.pushState({ page: 'books' }, '', '');
     main.style.display = 'none';
     booksPage.style.display = 'block';
   }
 
-  // التعامل مع زر الرجوع في المتصفح
   window.addEventListener('popstate', (event) => {
     if (event.state && event.state.page === 'main') {
       booksPage.style.display = 'none';
@@ -286,7 +284,6 @@
       main.style.display = 'none';
       booksPage.style.display = 'block';
     } else {
-      // الافتراضي: صفحة الغلاف
       main.style.display = 'none';
       booksPage.style.display = 'none';
       splash.style.display = 'flex';
@@ -294,7 +291,6 @@
     }
   });
 
-  // توسيع/طي محتويات الكتب مع تدوير السهم
   function toggleContents(id) {
     const contents = document.getElementById(id);
     if (!contents) return;
@@ -315,7 +311,6 @@
     }
   }
 
-  // ربط حدث النقر لعناوين الكتب التي تحتوي على محتويات فقط
   document.querySelectorAll('.book-title').forEach(title => {
     title.addEventListener('click', () => {
       const bookDiv = title.parentElement;
@@ -325,7 +320,6 @@
       }
     });
 
-    // دعم الكيبورد (Enter و Space)
     title.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
