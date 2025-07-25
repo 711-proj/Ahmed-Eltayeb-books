@@ -25,11 +25,14 @@
       z-index: 9999;
       transition: transform 1s ease-in-out, opacity 1s ease-in-out;
       padding-right: 3rem;
+      cursor: pointer; /* اجعل المؤشر يشير أنه يمكن التفاعل */
+      user-select: none; /* منع التحديد غير المقصود */
     }
 
     .splash.lift {
       transform: translateY(-100%);
       opacity: 0;
+      pointer-events: none; /* لتعطيل التفاعل أثناء الانزلاق */
     }
 
     .splash::before {
@@ -59,11 +62,11 @@
     }
 
     .main button {
-      display: block;          /* عرض كـ block ليكون كل زر في سطر */
-      width: 80%;              /* عرض الزر تقريبا 80% من العرض */
-      margin: 1rem auto;       /* مركزيه و مسافة رأسية بين الأزرار */
-      font-size: 3.5rem;       /* حجم خط كبير جداً */
-      padding: 1.2rem 0;       /* ارتفاع الزر */
+      display: block;
+      width: 80%;
+      margin: 1rem auto;
+      font-size: 3.5rem;
+      padding: 1.2rem 0;
       border: none;
       border-radius: 12px;
       background-color: #004e7c;
@@ -88,6 +91,8 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       padding: 1rem;
       margin-bottom: 1.5rem;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
     }
 
     .book-title {
@@ -95,6 +100,7 @@
       font-weight: bold;
       cursor: pointer;
       color: #004e7c;
+      user-select: none;
     }
 
     .book-title:hover {
@@ -108,7 +114,15 @@
     }
 
     .contents {
-      display: none;
+      max-height: 0;
+      overflow: hidden;
+      padding-top: 0;
+      transition: max-height 0.4s ease, padding-top 0.4s ease;
+    }
+
+    /* عند وجود الكلاس active تظهر القائمة */
+    .contents.active {
+      max-height: 2000px; /* قيمة كبيرة كافية لعرض المحتوى */
       padding-top: 1rem;
     }
 
@@ -206,7 +220,7 @@
 </div>
 
 <script>
-  document.addEventListener('click', function handleSplashClick() {
+  function closeSplashAndShowMain() {
     const splash = document.getElementById("splash");
     splash.classList.add("lift");
     history.pushState({ page: 'main' }, '', '');
@@ -214,8 +228,12 @@
       splash.style.display = "none";
       document.getElementById("main").style.display = "block";
     }, 1000);
-    document.removeEventListener('click', handleSplashClick);
-  });
+  }
+
+  // تفعيل الإغلاق على الضغط أو السحب (لمس)
+  const splash = document.getElementById("splash");
+  splash.addEventListener('click', closeSplashAndShowMain);
+  splash.addEventListener('touchstart', closeSplashAndShowMain);
 
   function showBooks() {
     history.pushState({ page: 'books' }, '', '');
@@ -236,7 +254,7 @@
 
   function toggleContents(id) {
     const el = document.getElementById(id);
-    el.style.display = el.style.display === "none" ? "block" : "none";
+    el.classList.toggle("active");
   }
 </script>
 </body>
