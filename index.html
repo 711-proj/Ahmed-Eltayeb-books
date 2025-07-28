@@ -122,10 +122,7 @@ window.addEventListener('popstate', function (event) { if (event.state && event.
 
 function toggleContents(id) { const el = document.getElementById(id); if (el.style.display === "block") { el.style.display = "none"; } else { document.querySelectorAll('.contents').forEach(c => c.style.display = 'none'); el.style.display = "block"; } } 
 </script>
-  
-</script>
-  
-<button id="backButton" style="
+  <button id="backButton" style="
   position: fixed;
   bottom: 1.5rem;
   right: 1.5rem;
@@ -159,6 +156,7 @@ function toggleContents(id) { const el = document.getElementById(id); if (el.sty
       history.back();
     }
   });
+</script>
 
 </body>
 </html>
