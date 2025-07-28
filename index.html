@@ -120,6 +120,42 @@ function showBooks() { history.pushState({ page: 'books' }, '', ''); document.ge
 
 window.addEventListener('popstate', function (event) { if (event.state && event.state.page === 'main') { document.getElementById("booksPage").style.display = "none"; document.getElementById("main").style.display = "block"; } else { document.getElementById("main").style.display = "none"; document.getElementById("booksPage").style.display = "none"; const splash = document.getElementById("splash"); splash.style.display = "flex"; splash.classList.remove("lift"); } });
 
-function toggleContents(id) { const el = document.getElementById(id); if (el.style.display === "block") { el.style.display = "none"; } else { document.querySelectorAll('.contents').forEach(c => c.style.display = 'none'); el.style.display = "block"; } } </script></body>
+function toggleContents(id) { const el = document.getElementById(id); if (el.style.display === "block") { el.style.display = "none"; } else { document.querySelectorAll('.contents').forEach(c => c.style.display = 'none'); el.style.display = "block"; } } </script>
+<button id="backButton" style="
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #004e7c;
+  color: white;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  display: none;
+">🔙 رجوع</button>
+
+<script>
+  const backBtn = document.getElementById("backButton");
+
+  function updateBackButtonVisibility() {
+    const splash = document.getElementById("splash");
+    const isSplashVisible = splash && getComputedStyle(splash).display !== "none";
+    backBtn.style.display = isSplashVisible ? "none" : "block";
+  }
+
+  // أظهر الزر فقط إذا لم تكن في صفحة الغلاف
+  window.addEventListener("load", updateBackButtonVisibility);
+  window.addEventListener("popstate", updateBackButtonVisibility);
+
+  // زر الرجوع يرجع للخلف
+  backBtn.addEventListener("click", () => {
+    if (history.length > 1) {
+      history.back();
+    }
+  });
+</script></body>
 
 </html>
