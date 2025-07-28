@@ -123,6 +123,8 @@ window.addEventListener('popstate', function (event) { if (event.state && event.
 function toggleContents(id) { const el = document.getElementById(id); if (el.style.display === "block") { el.style.display = "none"; } else { document.querySelectorAll('.contents').forEach(c => c.style.display = 'none'); el.style.display = "block"; } } 
 </script>
   
+</script>
+  
 <button id="backButton" style="
   position: fixed;
   bottom: 1.5rem;
@@ -152,12 +154,12 @@ function toggleContents(id) { const el = document.getElementById(id); if (el.sty
   window.addEventListener("load", updateBackButtonVisibility);
   window.addEventListener("popstate", updateBackButtonVisibility);
 
-  // زر الرجوع يرجع للخلف
   backBtn.addEventListener("click", () => {
     if (history.length > 1) {
       history.back();
     }
   });
-</script></body>
+</script>
 
+</body>
 </html>
