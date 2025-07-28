@@ -1,275 +1,166 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+  <meta charset="UTF-8">
   <title>مكتبة أحمد الطيب أحمد</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap');
-    body {
-      margin: 0;
-      font-family: 'Cairo', sans-serif;
-      background-color: #f9f9f9;
-      color: #222;
-    }
-    .splash {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url('background-pattern.jpg') center center no-repeat;
-      background-size: cover;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      z-index: 9999;
-      padding-right: 3rem;
-      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
-    }
-    .splash.lift {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-    .splash::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-color: rgba(255,255,255,0.85);
-      z-index: -1;
-    }
-    .splash-header {
-      font-size: 3rem;
-      font-weight: bold;
-      color: #004e7c;
-      text-align: right;
-      margin-left: auto;
-      margin-right: 0;
-    }
-    .main {
-      display: none;
-      padding: 2rem;
-      text-align: center;
-    }
-    .main h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-    .main button {
-      font-size: 2rem;
-      padding: 1rem 2rem;
-      margin: 1rem;
-      border: none;
-      border-radius: 8px;
-      background-color: #004e7c;
-      color: white;
-      cursor: pointer;
-      display: block;
-      width: 80%;
-      margin-right: auto;
-      margin-left: auto;
-    }
-    .main button:hover {
-      background-color: #0077aa;
-    }
-    .books-page {
-      display: none;
-      max-width: 800px;
-      margin: 2rem auto;
-    }
-    .book {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .book-title {
-      font-size: 2.5rem;
-      font-weight: bold;
-      cursor: pointer;
-      color: #004e7c;
-      position: relative;
-    }
-    .book-title::before {
-      content: "\25BC";
-      position: absolute;
-      right: -2rem;
-      font-size: 1.8rem;
-      color: #004e7c;
-    }
-    .book-title:hover {
-      text-decoration: underline;
-    }
-    .download {
-      float: left;
-      margin-right: 1rem;
-      font-size: 1.3rem;
-    }
-    .contents {
-      display: none;
-      padding-top: 1rem;
-      font-size: 2rem;
-    }
-    .contents li {
-      list-style: disc;
-      margin: 0.4rem 0;
-      padding-right: 1rem;
-      text-align: right;
-    }
-    .contents a {
-      text-decoration: none;
-      color: #0077aa;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap');body {
+  margin: 0;
+  font-family: 'Cairo', sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+}.splash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('background-pattern.jpg') center center no-repeat; background-size: cover; display: flex; justify-content: flex-end; align-items: center; z-index: 9999; padding-right: 3rem; transition: transform 1s ease-in-out, opacity 1s ease-in-out; }
+
+.splash.lift { transform: translateY(-100%); opacity: 0; }
+
+.splash::before { content: ""; position: absolute; inset: 0; background-color: rgba(255,255,255,0.85); z-index: -1; }
+
+.splash-header { font-size: 3rem; font-weight: bold; color: #004e7c; text-align: right; margin-left: auto; margin-right: 0; }
+
+.main { display: none; padding: 2rem; text-align: center; }
+
+.main h2 { font-size: 2rem; margin-bottom: 2rem; }
+
+.main button { font-size: 2rem; padding: 1rem 2rem; margin: 1rem; border: none; border-radius: 8px; background-color: #004e7c; color: white; cursor: pointer; display: block; width: 80%; margin-right: auto; margin-left: auto; }
+
+.main button:hover { background-color: #0077aa; }
+
+.books-page { display: none; max-width: 800px; margin: 2rem auto; }
+
+.book { background-color: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); padding: 1rem; margin-bottom: 1.5rem; }
+
+.book-title { font-size: 2.5rem; font-weight: bold; cursor: pointer; color: #004e7c; position: relative; }
+
+.book-title::before { content: "\25BC"; position: absolute; right: -2rem; font-size: 1.8rem; color: #004e7c; }
+
+.book-title:hover { text-decoration: underline; }
+
+.download { float: left; margin-right: 1rem; font-size: 1.3rem; }
+
+.contents { display: none; padding-top: 1rem; font-size: 2rem; }
+
+.contents li { list-style: disc; margin: 0.4rem 0; padding-right: 1rem; text-align: right; }
+
+.contents a { text-decoration: none; color: #0077aa; }
+
   </style>
 </head>
-<body>
-  <div class="splash" id="splash">
-    <div class="splash-header">الكاتب / أحمد الطيب أحمد</div>
+<body><div class="splash" id="splash">
+  <div class="splash-header">الكاتب / أحمد الطيب أحمد</div>
+</div><div class="main" id="main">
+  <h2>قائمة المحتويات</h2>
+  <button onclick="showBooks()">📚 كتب</button>
+  <button>📰 مقالات</button>
+</div><div class="books-page" id="booksPage">
+  <div class="book">
+    <div class="download">
+      <a href="الخلاف_بين_الصحابة_أحمد_الطيب_أحمد.pdf" download>⬇️ تحميل الكتاب</a>
+    </div>
+    <div class="book-title" onclick="toggleContents('book1')">الخلاف بين الصحابة، والتأسيس لنظام حكم إسلامي</div>
+    <ul class="contents" id="book1">
+      <li><a href="contents/khilaf/01-muqaddima.html" target="_blank">المقدمة</a></li>
+      <li><a href="#">منهج الكتابة في الخلاف بين الصحابة</a></li>
+      <li><a href="#">الباب الأول: النصوص والسوابق</a></li>
+      <li><a href="#">الفصل الأول: ولاية الأمر في الكتاب والسنة</a></li>
+      <li><a href="#">الفصل الثاني: عهد النبوة</a></li>
+      <li><a href="#">الفصل الثالث: بيعة أبي بكر</a></li>
+      <li><a href="#">الفصل الرابع: بيعة أبي بكر - إختيار أم استخلاف؟</a></li>
+      <li><a href="#">الفصل الخامس: استخلاف عمر</a></li>
+      <li><a href="#">الفصل السادس: العهد إلى الستة</a></li>
+      <li><a href="#">الباب الثاني: الفتن والملاحم</a></li>
+      <li><a href="#">الفصل الأول: الثورة على عثمان</a></li>
+      <li><a href="#">الفصل الثاني: ولاية عثمان ومقتله: دروس وعبر</a></li>
+      <li><a href="#">الفصل الثالث: بيعة علي</a></li>
+      <li><a href="#">الفصل الرابع: نهج جديد في اختيار الخليفة</a></li>
+      <li><a href="#">الفصل الخامس: وقعة الجمل</a></li>
+      <li><a href="#">الفصل السادس: بين علي ومعاوية</a></li>
+      <li><a href="#">الفصل السابع: صفين والتحكيم</a></li>
+      <li><a href="#">الفصل الثامن: نهاية الخلافة الراشدة، دروس وعبر</a></li>
+      <li><a href="#">الباب الثالث: التأسيس لنظام سياسي إسلامي</a></li>
+      <li><a href="#">الفصل الأول: مرجعية النظام</a></li>
+      <li><a href="#">الفصل الثاني: نشأة الفكر السياسي الإسلامي</a></li>
+      <li><a href="#">الفصل الثالث: الملامح العامة للنظام السياسي الإسلامي</a></li>
+    </ul>
+  </div>  <div class="book">
+    <div class="download">
+      <a href="#" download>⬇️ تحميل الكتاب</a>
+    </div>
+    <div class="book-title">السنة النبوية: قضايا ومرافعات</div>
+  </div>  <div class="book">
+    <div class="download">
+      <a href="#" download>⬇️ تحميل الكتاب</a>
+    </div>
+    <div class="book-title">كتيب: إصلاح الصلاة وسجود السهو</div>
+  </div>  <div class="book">
+    <div class="download">
+      <a href="#" download>⬇️ تحميل الكتاب</a>
+    </div>
+    <div class="book-title">كتيب: عمك الطيب ود أحمد</div>
+  </div>  <div class="book">
+    <div class="download">
+      <a href="#" download>⬇️ تحميل الكتاب</a>
+    </div>
+    <div class="book-title">سرادب الأحلام – ديوان شعر</div>
+  </div>  <div class="book">
+    <div class="download">
+      <a href="#" download>⬇️ تحميل الكتاب</a>
+    </div>
+    <div class="book-title">هامات عالية وذرا – ديوان شعر</div>
   </div>
-  <div class="main" id="main">
-    <h2>قائمة المحتويات</h2>
-    <button onclick="showBooks()">📚 كتب</button>
-    <button>📰 مقالات</button>
-  </div>
-  <div class="books-page" id="booksPage">
-    <div class="book">
-      <div class="download">
-        <a href="الخلاف_بين_الصحابة_أحمد_الطيب_أحمد.pdf" download>⬇️ تحميل الكتاب</a>
-      </div>
-      <div class="book-title" onclick="toggleContents('book1')">الخلاف بين الصحابة، والتأسيس لنظام حكم إسلامي</div>
-      <ul class="contents" id="book1">
-        <li><a href="contents/khilaf/01-muqaddima.html" target="_blank">المقدمة</a></li>
-        <li><a href="#">منهج الكتابة في الخلاف بين الصحابة</a></li>
-        <li><a href="#">الباب الأول: النصوص والسوابق</a></li>
-        <li><a href="#">الفصل الأول: ولاية الأمر في الكتاب والسنة</a></li>
-        <li><a href="#">الفصل الثاني: عهد النبوة</a></li>
-        <li><a href="#">الفصل الثالث: بيعة أبي بكر</a></li>
-        <li><a href="#">الفصل الرابع: بيعة أبي بكر - إختيار أم استخلاف؟</a></li>
-        <li><a href="#">الفصل الخامس: استخلاف عمر</a></li>
-        <li><a href="#">الفصل السادس: العهد إلى الستة</a></li>
-        <li><a href="#">الباب الثاني: الفتن والملاحم</a></li>
-        <li><a href="#">الفصل الأول: الثورة على عثمان</a></li>
-        <li><a href="#">الفصل الثاني: ولاية عثمان ومقتله: دروس وعبر</a></li>
-        <li><a href="#">الفصل الثالث: بيعة علي</a></li>
-        <li><a href="#">الفصل الرابع: نهج جديد في اختيار الخليفة</a></li>
-        <li><a href="#">الفصل الخامس: وقعة الجمل</a></li>
-        <li><a href="#">الفصل السادس: بين علي ومعاوية</a></li>
-        <li><a href="#">الفصل السابع: صفين والتحكيم</a></li>
-        <li><a href="#">الفصل الثامن: نهاية الخلافة الراشدة، دروس وعبر</a></li>
-        <li><a href="#">الباب الثالث: التأسيس لنظام سياسي إسلامي</a></li>
-        <li><a href="#">الفصل الأول: مرجعية النظام</a></li>
-        <li><a href="#">الفصل الثاني: نشأة الفكر السياسي الإسلامي</a></li>
-        <li><a href="#">الفصل الثالث: الملامح العامة للنظام السياسي الإسلامي</a></li>
-      </ul>
-    </div>
-    <div class="book">
-      <div class="download">
-        <a href="#" download>⬇️ تحميل الكتاب</a>
-      </div>
-      <div class="book-title">السنة النبوية: قضايا ومرافعات</div>
-    </div>
-    <div class="book">
-      <div class="download">
-        <a href="#" download>⬇️ تحميل الكتاب</a>
-      </div>
-      <div class="book-title">كتيب: إصلاح الصلاة وسجود السهو</div>
-    </div>
-    <div class="book">
-      <div class="download">
-        <a href="#" download>⬇️ تحميل الكتاب</a>
-      </div>
-      <div class="book-title">كتيب: عمك الطيب ود أحمد</div>
-    </div>
-    <div class="book">
-      <div class="download">
-        <a href="#" download>⬇️ تحميل الكتاب</a>
-      </div>
-      <div class="book-title">سرادب الأحلام – ديوان شعر</div>
-    </div>
-    <div class="book">
-      <div class="download">
-        <a href="#" download>⬇️ تحميل الكتاب</a>
-      </div>
-      <div class="book-title">هامات عالية وذرا – ديوان شعر</div>
-    </div>
-  </div>
+</div><script>
+  function hideSplash() {
+    const splash = document.getElementById("splash");
+    splash.classList.add("lift");
+    history.pushState({ page: 'main' }, '', '');
+    setTimeout(() => {
+      splash.style.display = "none";
+      document.getElementById("main").style.display = "block";
+    }, 1000);
+  }document.getElementById("splash").addEventListener("click", hideSplash); document.getElementById("splash").addEventListener("touchstart", hideSplash); document.getElementById("splash").addEventListener("touchmove", hideSplash);
 
-  <script>
-    function hideSplash() {
-      const splash = document.getElementById("splash");
-      splash.classList.add("lift");
-      history.pushState({ page: 'main' }, '', '');
-      setTimeout(() => {
-        splash.style.display = "none";
-        document.getElementById("main").style.display = "block";
-      }, 1000);
+function showBooks() { history.pushState({ page: 'books' }, '', ''); document.getElementById("main").style.display = "none"; document.getElementById("booksPage").style.display = "block"; }
+
+window.addEventListener('popstate', function (event) { if (event.state && event.state.page === 'main') { document.getElementById("booksPage").style.display = "none"; document.getElementById("main").style.display = "block"; } else { document.getElementById("main").style.display = "none"; document.getElementById("booksPage").style.display = "none"; const splash = document.getElementById("splash"); splash.style.display = "flex"; splash.classList.remove("lift"); } });
+
+function toggleContents(id) { const el = document.getElementById(id); if (el.style.display === "block") { el.style.display = "none"; } else { document.querySelectorAll('.contents').forEach(c => c.style.display = 'none'); el.style.display = "block"; } } 
+</script>
+
+<!-- زر الرجوع -->
+<button id="backButton" style="
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #004e7c;
+  color: white;
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  display: none;
+">🔙 رجوع</button>
+
+<script>
+  const backBtn = document.getElementById("backButton");
+
+  function updateBackButtonVisibility() {
+    const page = history.state ? history.state.page : null;
+
+    if (page === 'main' || page === 'books') {
+      backBtn.style.display = "block";
+    } else {
+      backBtn.style.display = "none";
     }
-    document.getElementById("splash").addEventListener("click", hideSplash);
-    document.getElementById("splash").addEventListener("touchstart", hideSplash);
-    document.getElementById("splash").addEventListener("touchmove", hideSplash);
+  }
 
-    function showBooks() {
-      history.pushState({ page: 'books' }, '', '');
-      document.getElementById("main").style.display = "none";
-      document.getElementById("booksPage").style.display = "block";
+  window.addEventListener("load", updateBackButtonVisibility);
+  window.addEventListener("popstate", updateBackButtonVisibility);
+
+  backBtn.addEventListener("click", () => {
+    if (history.length > 1) {
+      history.back();
     }
-
-    window.addEventListener('popstate', function (event) {
-      if (event.state && event.state.page === 'main') {
-        document.getElementById("booksPage").style.display = "none";
-        document.getElementById("main").style.display = "block";
-      } else {
-        document.getElementById("main").style.display = "none";
-        document.getElementById("booksPage").style.display = "none";
-        const splash = document.getElementById("splash");
-        splash.style.display = "flex";
-        splash.classList.remove("lift");
-      }
-    });
-
-    function toggleContents(id) {
-      const el = document.getElementById(id);
-      if (el.style.display === "block") {
-        el.style.display = "none";
-      } else {
-        document.querySelectorAll('.contents').forEach(c => c.style.display = 'none');
-        el.style.display = "block";
-      }
-    }
-  </script>
-
-  <button id="backButton" style="
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    padding: 0.8rem 1.2rem;
-    font-size: 1.3rem;
-    border: none;
-    border-radius: 10px;
-    background-color: #004e7c;
-    color: white;
-    cursor: pointer;
-    z-index: 10000;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    display: none;
-  ">🔙 رجوع</button>
-
-  <script>
-    const backBtn = document.getElementById("backButton");
-
-    function updateBackButtonVisibility() {
-      const splash = document.getElementById("splash");
-      const isSplashVisible = splash && getComputedStyle(splash).display !== "none";
-      backBtn.style.display = isSplashVisible ? "none" : "block";
-    }
-
-    // أظهر الزر فقط إذا لم تكن في صفحة الغلاف
-    window.addEventListener("load", updateBackButtonVisibility);
-    window.addEventListener("popstate", updateBackButtonVisibility);
-
-    backBtn.addEventListener("click", () => {
-      if (history.length > 1) {
-        history.back();
-      }
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
