@@ -120,7 +120,9 @@ function showBooks() { history.pushState({ page: 'books' }, '', ''); document.ge
 
 window.addEventListener('popstate', function (event) { if (event.state && event.state.page === 'main') { document.getElementById("booksPage").style.display = "none"; document.getElementById("main").style.display = "block"; } else { document.getElementById("main").style.display = "none"; document.getElementById("booksPage").style.display = "none"; const splash = document.getElementById("splash"); splash.style.display = "flex"; splash.classList.remove("lift"); } });
 
-function toggleContents(id) { const el = document.getElementById(id); if (el.style.display === "block") { el.style.display = "none"; } else { document.querySelectorAll('.contents').forEach(c => c.style.display = 'none'); el.style.display = "block"; } } </script>
+function toggleContents(id) { const el = document.getElementById(id); if (el.style.display === "block") { el.style.display = "none"; } else { document.querySelectorAll('.contents').forEach(c => c.style.display = 'none'); el.style.display = "block"; } } 
+</script>
+  
 <button id="backButton" style="
   position: fixed;
   bottom: 1.5rem;
